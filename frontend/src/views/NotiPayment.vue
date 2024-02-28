@@ -25,15 +25,18 @@
                 
             </table>    
         </div>
+        <FooterBar/>
     </section>
 </template>
 
 <script>
 import NavBar from './NavBar.vue';
+import FooterBar from './FooterBar.vue'
 
 export default {
   components: {
-    NavBar
+    NavBar,
+    FooterBar
   }
 }
 </script>
