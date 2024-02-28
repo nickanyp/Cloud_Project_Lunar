@@ -44,6 +44,11 @@ const routes = [
     name: 'Dormitory',
     component: () => import('./views/DorPage.vue')
   },
+  {
+    path: '/EditDormitory',
+    name: 'EditDormitory',
+    component: () => import('./views/EditDor.vue')
+  },
 ]
 
 const router = new VueRouter({

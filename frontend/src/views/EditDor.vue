@@ -20,11 +20,11 @@
             <div class="flex flex-row w-full mt-10">
                 <h5 class="text-3xl font-medium tracking-wide mx-10 basis-3/4">ลงทะเบียนหอพัก</h5>
                 <div class="flex flex-row mx-10 gap-5 justify-end basis-1/4">
-                    <router-link to="/HomeLogin" class="w-10/12">
-                        <button class="text-white w-full font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500">ยืนยัน</button>
+                    <router-link to="/Dormitory" class="w-10/12">
+                        <button class="text-white w-full font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500">บันทึก</button>
                     </router-link>
-                    <router-link to="/HomeLogin" class="w-10/12">
-                        <button class=" border-2 w-full font-medium p-2 rounded-3xl border-[#2E4E73] text-[#2E4E73]"> ยกเลิก</button>
+                    <router-link to="/Dormitory" class="w-10/12">
+                        <button class=" border-2 w-full font-medium p-2 rounded-3xl border-[#2E4E73] text-[#2E4E73]">ยกเลิก</button>
                     </router-link>
                     
                 </div>
