@@ -1,6 +1,21 @@
 <template>
     <section id="app" style="font-family: 'Prompt', sans-serif;">
-        <NavBar />
+        <nav class="p-3" style="backgroundColor: #2E4E73; font-family: 'Prompt', sans-serif;">
+          <div class="flex flex-row">
+              <div class="flex flex-col basis-11/12">
+                  <div class="flex flex-row mx-5">
+                      <h1 class="text-white text-lg tracking-wider">LUNAR</h1>
+                      <img src="../../public/uploads/moon.png" alt="moon" class="mx-2 w-7">
+                  </div>
+                  <h1 class="text-white text-lg tracking-wider mx-5">DORMITORY</h1>
+              </div>
+              <div class="flex justify-center content-center items-center w-32 basis-1/12">
+                  <router-link to="Login">
+                    <button class="text-white text-base rounded-full border-2 px-3 py-2 " style="borderColor: #9ABDE3; font-family: 'Prompt', sans-serif;">เข้าสู่ระบบ</button>
+                  </router-link>
+              </div>
+          </div>
+        </nav>
         <div class="h-full">
             <div class="flex flex-col justify-center items-center overflow-hidden h-[65vh] w-full bg-[url('https://cdn.discordapp.com/attachments/859670322160599051/1212421188853440632/6e716d1046575431_1.png?ex=65f1c639&is=65df5139&hm=32c418af2193fc1cf3eb29baf3aa79f0adce516f73399de231f577b89833b02c&')] bg-cover">
               <p class="text-base text-white">THE BEST <br /></p>
@@ -84,12 +99,10 @@
 </template>
 
 <script>
-import NavBar from './NavBar.vue';
 import FooterBar from './FooterBar.vue'
 
 export default {
   components: {
-    NavBar,
     FooterBar
   }
 }

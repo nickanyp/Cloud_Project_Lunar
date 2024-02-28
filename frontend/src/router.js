@@ -34,6 +34,16 @@ const routes = [
     name: 'NotiPayment',
     component: () => import('./views/NotiPayment.vue')
   },
+  {
+    path: '/Renter',
+    name: 'Renter',
+    component: () => import('./views/RenterPage.vue')
+  },
+  {
+    path: '/Dormitory',
+    name: 'Dormitory',
+    component: () => import('./views/DorPage.vue')
+  },
 ]
 
 const router = new VueRouter({

@@ -2,11 +2,13 @@
     <section id="app" style="font-family: 'Prompt', sans-serif;">
         <div class="flex">
             <div class="flex flex-col w-1/2 h-screen justify-center items-center">
-                <div class="flex flex-row">
-                    <h1 class="text-xl font-semibold px-2" style='color: #2E4E73'>LUNAR</h1>
-                    <img src="../../public/uploads/moon_dark.png" alt="moon" width="30"/>
-                </div>
-                <h1 class="text-xl font-semibold mb-5" style='color: #2E4E73'>DORMITORY</h1>
+                <router-link to="/" class="hover:no-underline">
+                    <div class="flex flex-row">
+                        <h1 class="text-xl font-semibold px-2" style="color: #2E4E73">LUNAR</h1> 
+                        <img src="../../public/uploads/moon_dark.png" alt="moon" width="30"/>
+                    </div>
+                    <h1 class="text-xl font-semibold mb-5" style="color: #2E4E73">DORMITORY</h1>
+                </router-link>
 
                 <div class="relative mb-5 w-5/12">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400">
@@ -22,7 +24,7 @@
                     <input placeholder="รหัสผ่าน" class="rounded-xl border-gray-200 border-2 pt-2 pb-2 pl-10 placeholder-gray-500 w-full shadow-xl"/>
                 </div>
 
-                <router-link to="/" class="rounded-xl p-2 mt-3 mb-3 w-72 text-white bg-[#2E4E73] hover:bg-[#1A314C] text-center" >
+                <router-link to="/HomeLogin" class="rounded-xl p-2 mt-3 mb-3 w-72 text-white bg-[#2E4E73] hover:bg-[#1A314C] text-center" >
                     เข้าสู่ระบบ
                 </router-link>
                 <router-link to="Register" class="m-5 underline text-sm font-medium text-[#2E4E73]">

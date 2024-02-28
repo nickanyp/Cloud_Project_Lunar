@@ -6,11 +6,13 @@
             </div>
 
             <div class="flex flex-col w-1/2 h-screen justify-center items-center">
-                <div class="flex flex-row">
-                    <h1 class="text-xl font-semibold px-2" style="color: #2E4E73">LUNAR</h1> 
-                    <img src="../../public/uploads/moon_dark.png" alt="moon" width="30"/>
-                </div>
-                <h1 class="text-xl font-semibold mb-5" style="color: #2E4E73">DORMITORY</h1>
+                <router-link to="/" class="hover:no-underline">
+                    <div class="flex flex-row">
+                        <h1 class="text-xl font-semibold px-2" style="color: #2E4E73">LUNAR</h1> 
+                        <img src="../../public/uploads/moon_dark.png" alt="moon" width="30"/>
+                    </div>
+                    <h1 class="text-xl font-semibold mb-5" style="color: #2E4E73">DORMITORY</h1>
+                </router-link>
                 <div class="relative mb-3 w-5/12">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="w-6 h-6 absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>
@@ -44,8 +46,8 @@
                     <input placeholder="เบอร์โทร" class="rounded-xl border-gray-300 border-2 pt-2 pb-2 pl-10 placeholder-gray-500 w-full"/>
                 </div>
 
-                <button class="rounded-xl p-2 mt-3 w-5/12 text-white bg-[#2E4E73] hover:bg-[#1A314C]">ลงทะเบียน</button>
-                <router-link to="Register" class="m-5 underline text-sm font-medium text-[#2E4E73]">กลับสู่หน้าเข้าสู่ระบบ</router-link>
+                <router-link to="Login" class="rounded-xl p-2 mt-3 w-5/12 text-white text-center hover:no-underline bg-[#2E4E73] hover:bg-[#1A314C]">ลงทะเบียน</router-link>
+                <router-link to="Login" class="m-5 underline text-sm font-medium text-[#2E4E73]">กลับสู่หน้าเข้าสู่ระบบ</router-link>
             </div>
         </div>
     </section>

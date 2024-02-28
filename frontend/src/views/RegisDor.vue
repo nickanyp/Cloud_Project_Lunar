@@ -1,12 +1,32 @@
 <template>
     <section id="app" style="font-family: 'Prompt', sans-serif;">
-        <NavBar />
+        <nav class="p-3" style="backgroundColor: #2E4E73; font-family: 'Prompt', sans-serif;">
+          <div class="flex flex-row">
+              <div class="flex flex-col basis-11/12">
+                  <div class="flex flex-row mx-5">
+                      <h1 class="text-white text-lg tracking-wider">LUNAR</h1>
+                      <img src="../../public/uploads/moon.png" alt="moon" class="mx-2 w-7">
+                  </div>
+                  <h1 class="text-white text-lg tracking-wider mx-5">DORMITORY</h1>
+              </div>
+              <div class="flex justify-center content-center items-center w-32 basis-1/12">
+                  <router-link to="/">
+                    <button class="text-white text-base rounded-full border-2 px-3 py-2 " style="borderColor: #9ABDE3; font-family: 'Prompt', sans-serif;">ออกจากระบบ</button>
+                  </router-link>
+              </div>
+          </div>
+        </nav>
         <div>
             <div class="flex flex-row w-full mt-10">
                 <h5 class="text-3xl font-medium tracking-wide mx-10 basis-3/4">ลงทะเบียนหอพัก</h5>
                 <div class="flex flex-row mx-10 gap-5 justify-end basis-1/4">
-                    <button class="text-white w-10/12 font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500">บันทึก</button>
-                    <button class="w-10/12 border-2 font-medium p-2 rounded-3xl border-[#2E4E73] text-[#2E4E73]"> ยกเลิก</button>
+                    <router-link to="/HomeLogin" class="w-10/12">
+                        <button class="text-white w-full font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500">บันทึก</button>
+                    </router-link>
+                    <router-link to="/HomeLogin" class="w-10/12">
+                        <button class=" border-2 w-full font-medium p-2 rounded-3xl border-[#2E4E73] text-[#2E4E73]"> ยกเลิก</button>
+                    </router-link>
+                    
                 </div>
             </div>
             
@@ -83,16 +103,5 @@
                 </div>
             </div>
         </div>
-        <!-- <FooterBar/> -->
     </section>
 </template>
-
-<script>
-import NavBar from './NavBar.vue';
-
-export default {
-  components: {
-    NavBar,
-  }
-}
-</script>
