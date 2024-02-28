@@ -20,6 +20,11 @@ const routes = [
     component: () => import('./views/LoginPage.vue')
   },
   {
+    path: '/Register',
+    name: 'Register',
+    component: () => import('./views/RegiterPage.vue')
+  },
+  {
     path: '/NotiPayment',
     name: 'NotiPayment',
     component: () => import('./views/NotiPayment.vue')
