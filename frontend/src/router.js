@@ -25,6 +25,11 @@ const routes = [
     component: () => import('./views/RegiterPage.vue')
   },
   {
+    path: '/RegisterDormitory',
+    name: 'RegisterDOrmitory',
+    component: () => import('./views/RegisDor.vue')
+  },
+  {
     path: '/NotiPayment',
     name: 'NotiPayment',
     component: () => import('./views/NotiPayment.vue')
