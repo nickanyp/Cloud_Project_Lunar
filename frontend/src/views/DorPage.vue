@@ -23,7 +23,22 @@ export default {
   components: {
     NavBar,
     // FooterBar
-  }
+  },
+  data() {
+        return {
+          dormitory:null
+        };
+    },
+    created() {
+      axios.get("")
+      .then((response) => {
+        this.dormitory = response.data;
+        console.log(response.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },
 }
 </script>
 

@@ -75,11 +75,27 @@
 <script>
 // import NavBar from './NavBar.vue';
 import FooterBar from './FooterBar.vue'
+import axios from "axios";
 
 export default {
-  components: {
-    // NavBar,
-    FooterBar
-  }
+    components: {
+        // NavBar,
+        FooterBar
+    },
+    data() {
+        return {
+          dormitory:null
+        };
+    },
+    created() {
+      axios.get("")
+      .then((response) => {
+        this.dormitory = response.data;
+        console.log(response.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },
 }
 </script>
