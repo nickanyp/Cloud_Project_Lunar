@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import NavBar from './NavBar.vue';
 // import FooterBar from './FooterBar.vue'
 
