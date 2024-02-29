@@ -23,8 +23,8 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec</p>
             </div>
             <div class="flex flex-row mx-10 gap-5 justify-end basis-1/6">
-                <router-link to="/RegisterDormitory" class="h-12 w-8/12 ">
-                    <button class="text-white font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500">+ ลงทะเบียนหอพัก</button>
+                <router-link to="/RegisterDormitory" class="h-12 w-9/12 ">
+                    <button class="text-white p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500" style="font-family: 'Prompt', sans-serif;">+ ลงทะเบียนหอพัก</button>
                 </router-link>
             </div>
         </div>

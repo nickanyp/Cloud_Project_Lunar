@@ -49,6 +49,11 @@ const routes = [
     name: 'EditDormitory',
     component: () => import('./views/EditDor.vue')
   },
+  {
+    path: '/AddRenter',
+    name: 'AddRenter',
+    component: () => import('./views/AddRenter.vue')
+  },
 ]
 
 const router = new VueRouter({

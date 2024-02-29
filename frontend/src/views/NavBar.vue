@@ -16,7 +16,7 @@
                 <router-link to="/NotiPayment" class="text-white text-base hover:bg-slate-500 border-3 rounded-3xl hover:no-underline p-3">แจ้งชำระ</router-link>
             </div>
 
-            <div class="flex justify-center content-center items-center w-36">
+            <div class="flex justify-center content-center items-center w-40">
                 <router-link to="/">
                   <button class="text-white text-base rounded-full border-2 px-3 py-2 " style="borderColor: #9ABDE3; font-family: 'Prompt', sans-serif;">ออกจากระบบ</button>
                 </router-link>
