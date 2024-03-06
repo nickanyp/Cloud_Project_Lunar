@@ -11,15 +11,11 @@ app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 // routers    
-const indexRouter = require('./routes/index')
-const userRouter = require('./routes/user')
-const uploadRouter = require('./routes/upload_data')
-const adminRouter = require('./routes/admin')
+const cloudRouter = require('./routes/cloud')
+const dormitoryRouter = require('./routes/dormitory')
 
-app.use(indexRouter.router)
-app.use(userRouter.router)
-app.use(uploadRouter.router)
-app.use(adminRouter.router)
+app.use(cloudRouter.router)
+app.use(dormitoryRouter.router)
 
 app.listen(3000, () => {
   console.log(`Example app listening at http://localhost:3000`)
