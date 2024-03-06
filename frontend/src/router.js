@@ -50,11 +50,6 @@ const routes = [
     component: () => import('./views/EditDor.vue')
   },
   {
-    path: '/AddDormitory',
-    name: 'AddDormitory',
-    component: () => import('./views/AddDor.vue')
-  },
-  {
     path: '/AddRenter',
     name: 'AddRenter',
     component: () => import('./views/AddRenter.vue')

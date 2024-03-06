@@ -125,7 +125,7 @@
         >
           ลบข้อมูล
         </button>
-        <router-link to="./EditDor.vue">
+        <router-link to="/EditDormitory">
           <button
           class="text-white font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500"
         >
