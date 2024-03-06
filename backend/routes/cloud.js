@@ -157,7 +157,49 @@ router.delete('/deleteRenter/:userId/:dorId/:rentId', async function(req, res, n
         console.log(err)
     }
 })
+
 // renter ==========================================================================================================================
+
+// payment ==========================================================================================================================
+
+router.get('/payment/:userId/:dorId',upload.single(), async function(req, res, next){
+    try{
+        const result = await pool.query(
+            `select * from payment p join renter r on(p.id_renter = r.id) where id_dormitory = ? and date = ?`, [req.params.dorId, req.body.date]
+        );
+        return res.json(result)
+    }catch (err){
+        console.log(err)
+    }
+})
+
+router.post('/addPayment/:userId/:dorId/:rentId',upload.single(), async function(req, res, next){
+    try{
+        const result = await pool.query(
+            "insert into payment(id_dormitory, id_renter, date, water, light, status) VALUES(?, ?, ?, ?, ?, ?)",
+            [req.params.dorId, req.params.rentId, req.body.date, req.body.water, req.body.light, req.body.status]
+        );
+        console.log('success')
+        return res.json(result)
+    }catch (err){
+        console.log(err)
+    }
+})
+
+router.put('/editRenter/:userId/:dorId/:rentId',upload.single(), async function(req, res, next){
+    try{
+        const result = await pool.query(
+            `UPDATE payment SET  water=?,  light=?, status=? where id_dormitory = ? and date = ? and id_renter =?`, 
+            [req.body.water, req.body.light, req.body.status, req.params.dorId, req.body.date, req.params.rentId]
+        );
+        console.log('success')
+        return res.json(result)
+    }catch (err){
+        console.log(err)
+    }
+})
+
+// payment ==========================================================================================================================
 
 
 exports.router = router;
