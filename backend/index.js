@@ -12,10 +12,8 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 // routers    
 const cloudRouter = require('./routes/cloud')
-const dormitoryRouter = require('./routes/dormitory')
 
 app.use(cloudRouter.router)
-app.use(dormitoryRouter.router)
 
 app.listen(3000, () => {
   console.log(`Example app listening at http://localhost:3000`)

@@ -46,7 +46,9 @@
                     <input v-model="phone" type="text" placeholder="เบอร์โทร" class="rounded-xl border-gray-300 border-2 pt-2 pb-2 pl-10 placeholder-gray-500 w-full"/>
                 </div>
 
-                <input type="submit" value="ลงทะเบียน" @click="regis()" class="rounded-xl p-2 mt-3 w-5/12 text-white text-center hover:no-underline bg-[#2E4E73] hover:bg-[#1A314C]">
+                <router-link to="" class="rounded-xl p-2 mt-3 w-5/12 text-white text-center hover:no-underline bg-[#2E4E73] hover:bg-[#1A314C]">
+                    <input type="submit" value="ลงทะเบียน" @click="regis()">
+                </router-link>
                 <router-link to="Login" class="m-5 underline text-sm font-medium text-[#2E4E73]">กลับสู่หน้าเข้าสู่ระบบ</router-link>
             </form>
         </div>
@@ -80,33 +82,25 @@ export default {
                 console.log(value);
             }
 
-            axios.post("http://localhost:3000/user", formData, {
+            axios.post("http://localhost:3000/RegisUser", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             })
             .then((response) => {
-                console.log(response.data)
-                axios.post("")
-                .then((response) => {
-                    console.log(response.data)
-                    Swal.fire({
-                        title: 'Success',
-                        text: 'ลงทะเบียนสำเร็จ',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        this.$router.push('/Login');
-                    }   
-                    )
+                console.log(response)
+                Swal.fire({
+                    position: 'top-start',
+                    icon: 'success',
+                    title: 'สร้างบัญชีผู้ใช้สำเร็จ',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    this.$router.push('/Login')
                 })
-                .catch((err) => {
-                    console.log(err);
-                });
+            }).catch((err) => {
+                console.log(err)
             })
-            .catch((err) => {
-                console.log(err);
-            });
         },
     }
 }

@@ -44,7 +44,8 @@ export default {
     data() {
         return {
           email: '',
-          password: ''
+          password: '',
+          user: null
         };
     },
     methods: {
@@ -57,13 +58,14 @@ export default {
                 console.log(value);
             }
 
-            axios.post("http://localhost:3000/user", formData, {
+            axios.get("http://localhost:3000/Login", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
             })
-            .then(() => {
-                this.$router.push('/HomeLogin');
+            .then((response) => {
+                this.user = response.data;
+                console.log(response.data)
             })
             .catch((err) => {
                 console.log(err);

@@ -1,13 +1,25 @@
-const express = require("express");
+const express = require("express")
 const path = require("path")
-const pool = require("../config");
+const pool = require("../config")
+const multer = require('multer')
 
-router = express.Router();
+router = express.Router()
+
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, './static/uploads') // path to save file
+    },
+    filename: function (req, file, callback) {
+        // set file name
+        callback(null, file.originalname)
+    }
+})
+const upload = multer({ storage: storage })
 
 router.post('/RegisUser',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            "insert into users(fname, lname, email, password, phone) VALUES(?, ?, ?, ?, ?)",
+            "insert into user(fname, lname, email, password, phone) VALUES(?, ?, ?, ?, ?)",
             [req.body.fname, req.body.lname, req.body.email, req.body.password, req.body.phone]
         );
         console.log('success')
@@ -20,7 +32,7 @@ router.post('/RegisUser',upload.single(), async function(req, res, next){
 router.get('/Login',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `select * from users where email = ? and password = ?`, [req.body.email, req.body.password]
+            `select * from user where email = ? and password = ?`, [req.body.email, req.body.password]
         );
         return res.json(result)
     }catch (err){
@@ -31,7 +43,7 @@ router.get('/Login',upload.single(), async function(req, res, next){
 router.get('/myDormitory/:userId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `select * from dormitory d join user u on(d.id_user = u.id) where d.id_user = ?`, [req.params.userId]
+            `select * from dormitory d join user u on(d.user_id = u.id) where d.user_id = ?`, [req.params.userId]
         );
         return res.json(result)
     }catch (err){
@@ -44,7 +56,7 @@ router.get('/myDormitory/:userId',upload.single(), async function(req, res, next
 router.post('/RegisDor/:userId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            "insert into dormitory(id_user, name, address, province, district, parish, post, phone, room, floor, water, light, due_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "insert into dormitory(user_id, name, address, province, district, parish, post, phone, room, floor, water, light, due_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [req.params.userId, req.body.name, req.body.address, req.body.province, req.body.district, req.body.parish, req.body.post, req.body.phone,
             req.body.room, req.body.floor, req.body.water, req.body.light, req.body.due_date]
         );
@@ -58,7 +70,7 @@ router.post('/RegisDor/:userId',upload.single(), async function(req, res, next){
 router.get('/Dormitory/:userId/:dorId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `select * from dormitory where id = ? and id_user = ?`, [req.params.dorId, req.params.userId]
+            `select * from dormitory where id = ? and user_id = ?`, [req.params.dorId, req.params.userId]
         );
         return res.json(result)
     }catch (err){
@@ -70,7 +82,7 @@ router.put('/editDormitory/:userId/:dorId',upload.single(), async function(req, 
     try{
         const result = await pool.query(
             `update dormitory set name=?, address=?, province=?, district=?, parish=?, post=?, phone=?, room=?, floor=?, water=?, light=?, due_date=? 
-            where id = ? and id_user = ?`, [req.body.name, req.body.address, req.body.province, req.body.district, req.body.parish, req.body.post, req.body.phone,
+            where id = ? and user_id = ?`, [req.body.name, req.body.address, req.body.province, req.body.district, req.body.parish, req.body.post, req.body.phone,
                 req.body.room, req.body.floor, req.body.water, req.body.light, req.body.due_date, req.params.dorId, req.params.userId]
         );
         console.log('success')
@@ -83,7 +95,7 @@ router.put('/editDormitory/:userId/:dorId',upload.single(), async function(req, 
 router.delete('/deleteDormitory/:userId/:dorId', async function(req, res, next){
     try{
         const result = await pool.query(
-            `delete from dormitory where id = ? and id_user = ?`, [req.params.dorId, req.params.userId]
+            `delete from dormitory where id = ? and user_id = ?`, [req.params.dorId, req.params.userId]
         );
         console.log('success')
         return res.json(result)
@@ -99,7 +111,7 @@ router.delete('/deleteDormitory/:userId/:dorId', async function(req, res, next){
 router.post('/addRenter/:userId/:dorId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            "insert into renter(id_dormitory, name1, name2, phone1, phone2, num_room, type, price, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "insert into renter(dor_id, name1, name2, phone1, phone2, num_room, type, price, email) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [req.params.dorId, req.body.name1, req.body.name2, req.body.phone1, req.body.phone2, req.body.num_room, req.body.type, req.body.price,
             req.body.email]
         );
@@ -113,7 +125,7 @@ router.post('/addRenter/:userId/:dorId',upload.single(), async function(req, res
 router.get('/Renter/:userId/:dorId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `select * from renter where id_dormitory = ?`, [req.params.dorId]
+            `select * from renter where dor_id = ?`, [req.params.dorId]
         );
         return res.json(result)
     }catch (err){
@@ -124,7 +136,7 @@ router.get('/Renter/:userId/:dorId',upload.single(), async function(req, res, ne
 router.get('/detailRenter/:userId/:dorId/:rentId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `select * from renter where id = ? and id_dormitory = ?`, [req.params.rentId, req.params.dorId]
+            `select * from renter where id = ? and dor_id = ?`, [req.params.rentId, req.params.dorId]
         );
         return res.json(result)
     }catch (err){
@@ -135,7 +147,7 @@ router.get('/detailRenter/:userId/:dorId/:rentId',upload.single(), async functio
 router.put('/editRenter/:userId/:dorId/:rentId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `UPDATE renter SET  num_room=?,  type=?, price=?, email=?, name1=?, phone1=?, name2=?, phone2=? WHERE id = ? and id_dormitory = ?`, 
+            `UPDATE renter SET  num_room=?,  type=?, price=?, email=?, name1=?, phone1=?, name2=?, phone2=? WHERE id = ? and dor_id = ?`, 
             [req.body.num_room, req.body.type, req.body.price, req.body.email, req.body.name1, req.body.phone1, req.body.name2,
                 req.body.phone2, req.params.rentId, req.params.dorId]
         );
@@ -149,7 +161,7 @@ router.put('/editRenter/:userId/:dorId/:rentId',upload.single(), async function(
 router.delete('/deleteRenter/:userId/:dorId/:rentId', async function(req, res, next){
     try{
         const result = await pool.query(
-            `delete from renter where id = ? and id_dormitory = ?`, [req.params.rentId, req.params.dorId]
+            `delete from renter where id = ? and dor_id = ?`, [req.params.rentId, req.params.dorId]
         );
         console.log('success')
         return res.json(result)
@@ -165,7 +177,7 @@ router.delete('/deleteRenter/:userId/:dorId/:rentId', async function(req, res, n
 router.get('/payment/:userId/:dorId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `select * from payment p join renter r on(p.id_renter = r.id) where id_dormitory = ? and date = ?`, [req.params.dorId, req.body.date]
+            `select * from payment p join renter r on(p.renter_id = r.id) where dor_id = ? and date = ?`, [req.params.dorId, req.body.date]
         );
         return res.json(result)
     }catch (err){
@@ -176,7 +188,7 @@ router.get('/payment/:userId/:dorId',upload.single(), async function(req, res, n
 router.post('/addPayment/:userId/:dorId/:rentId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            "insert into payment(id_dormitory, id_renter, date, water, light, status) VALUES(?, ?, ?, ?, ?, ?)",
+            "insert into payment(dor_id, renter_id, date, water, light, status) VALUES(?, ?, ?, ?, ?, ?)",
             [req.params.dorId, req.params.rentId, req.body.date, req.body.water, req.body.light, req.body.status]
         );
         console.log('success')
@@ -189,7 +201,7 @@ router.post('/addPayment/:userId/:dorId/:rentId',upload.single(), async function
 router.put('/editRenter/:userId/:dorId/:rentId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `UPDATE payment SET  water=?,  light=?, status=? where id_dormitory = ? and date = ? and id_renter =?`, 
+            `UPDATE payment SET  water=?,  light=?, status=? where dor_id = ? and date = ? and renter_id =?`, 
             [req.body.water, req.body.light, req.body.status, req.params.dorId, req.body.date, req.params.rentId]
         );
         console.log('success')
