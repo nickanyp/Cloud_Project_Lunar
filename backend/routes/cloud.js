@@ -97,9 +97,9 @@ router.get('/Dormitory/:userId/:dorId',upload.single(), async function(req, res,
 router.put('/editDormitory/:userId/:dorId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `update dormitory set name=?, address=?, province=?, district=?, parish=?, post=?, phone=?, room=?, floor=?, water=?, light=?, due_date=? 
+            `update dormitory set name=?, address=?, province=?, district=?, parish=?, post=?, phone=?, room=?, floor=?, water=?, light=?, duedate=? 
             where id = ? and user_id = ?`, [req.body.name, req.body.address, req.body.province, req.body.district, req.body.parish, req.body.post, req.body.phone,
-                req.body.room, req.body.floor, req.body.water, req.body.light, req.body.due_date, req.params.dorId, req.params.userId]
+                req.body.room, req.body.floor, req.body.water, req.body.light, req.body.duedate, req.params.dorId, req.params.userId]
         );
         console.log('success')
         return res.json(result)

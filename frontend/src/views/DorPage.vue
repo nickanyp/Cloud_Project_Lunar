@@ -7,9 +7,9 @@
                 <p>{{dormitory[0].address}}</p>
             </div>
             <div class="flex flex-row mx-10 gap-5 justify-end basis-1/6">
-                <router-link to="" class="h-12 w-8/12 flex justify-end">
+                <div class="h-12 w-8/12 flex justify-end">
                     <button @click="editDor()" class="text-white font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500">แก้ไขข้อมูล</button>
-                </router-link>
+                </div>
             </div>
     </div>
     <FooterBar />
@@ -34,7 +34,6 @@ export default {
     };
   },
   created() {
-    axios
       axios.get("http://localhost:3000/Dormitory/" + this.$route.params.userId+'/' + this.$route.params.dorId)
       .then((response) => {
         this.dormitory = response.data.dormitory[0];
@@ -48,7 +47,7 @@ export default {
   methods: {
         editDor(){
           console.log(this.userId, this.dorId)
-            this.$router.push('/EditDormitory/'+this.userId+'/'+this.dorId)
+          this.$router.push('/EditDormitory/'+this.userId+'/'+this.dorId)
         }
     }
 };
