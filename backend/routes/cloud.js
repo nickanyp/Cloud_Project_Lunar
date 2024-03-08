@@ -29,23 +29,37 @@ router.post('/RegisUser',upload.single(), async function(req, res, next){
     }
 })
 
-router.get('/Login',upload.single(), async function(req, res, next){
+router.post('/Login', upload.single(), async(req, res) => {
+    const email =  req.body.email
+    const password = req.body.password
+
+    const conn = await pool.getConnection()
+    await conn.beginTransaction()
+    console.log(password, email)
+
     try{
-        const result = await pool.query(
-            `select * from user where email = ? and password = ?`, [req.body.email, req.body.password]
-        );
-        return res.json(result)
-    }catch (err){
+        const [data] = await pool.query("select * from user where email = ? and password = ?",[email, password])
+        if(data.length == 0){
+            return res.json('อีเมลหรือรหัสผ่านไม่ถูกต้อง')
+        }
+        res.json(data)
+    }catch(err){
+        await conn.rollback()
         console.log(err)
+    }finally{
+        conn.release()
     }
 })
 
 router.get('/myDormitory/:userId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `select * from dormitory d join user u on(d.user_id = u.id) where d.user_id = ?`, [req.params.userId]
+            `select * from dormitory where user_id = ?`, [req.params.userId]
         );
-        return res.json(result)
+        console.log(result)
+        return res.json({
+            dormitory: result
+          })
     }catch (err){
         console.log(err)
     }
@@ -56,9 +70,9 @@ router.get('/myDormitory/:userId',upload.single(), async function(req, res, next
 router.post('/RegisDor/:userId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            "insert into dormitory(user_id, name, address, province, district, parish, post, phone, room, floor, water, light, due_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "insert into dormitory(user_id, name, address, province, district, parish, post, phone, room, floor, water, light, duedate) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             [req.params.userId, req.body.name, req.body.address, req.body.province, req.body.district, req.body.parish, req.body.post, req.body.phone,
-            req.body.room, req.body.floor, req.body.water, req.body.light, req.body.due_date]
+            req.body.room, req.body.floor, req.body.water, req.body.light, req.body.duedate]
         );
         console.log('success')
         return res.json(result)
@@ -72,7 +86,9 @@ router.get('/Dormitory/:userId/:dorId',upload.single(), async function(req, res,
         const result = await pool.query(
             `select * from dormitory where id = ? and user_id = ?`, [req.params.dorId, req.params.userId]
         );
-        return res.json(result)
+        return res.json({
+            dormitory: result
+          })
     }catch (err){
         console.log(err)
     }

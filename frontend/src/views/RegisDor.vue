@@ -84,16 +84,18 @@
                 </div>
             </div>
         </div>
-        <!-- <FooterBar/> -->
+        <FooterBar/>
     </section>
 </template>
 
 <script>
 import NavBar from './NavBar.vue';
+import FooterBar from './FooterBar.vue'
 
 export default {
   components: {
     NavBar,
+    FooterBar
   }
 }
 </script>

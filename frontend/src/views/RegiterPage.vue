@@ -90,7 +90,7 @@ export default {
             .then((response) => {
                 console.log(response)
                 Swal.fire({
-                    position: 'top-start',
+                    position: 'top-end',
                     icon: 'success',
                     title: 'สร้างบัญชีผู้ใช้สำเร็จ',
                     showConfirmButton: false,

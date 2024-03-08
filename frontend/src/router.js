@@ -25,8 +25,8 @@ const routes = [
     component: () => import('./views/RegiterPage.vue')
   },
   {
-    path: '/RegisterDormitory',
-    name: 'RegisterDOrmitory',
+    path: '/RegisterDormitory/:userId',
+    name: 'RegisterDormitory',
     component: () => import('./views/RegisDor.vue')
   },
   {
@@ -40,7 +40,7 @@ const routes = [
     component: () => import('./views/RenterPage.vue')
   },
   {
-    path: '/Dormitory',
+    path: '/Dormitory/:userId/:dorId',
     name: 'Dormitory',
     component: () => import('./views/DorPage.vue')
   },

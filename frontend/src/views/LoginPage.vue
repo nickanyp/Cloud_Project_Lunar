@@ -24,7 +24,9 @@
                     <input type="text" v-model="password" placeholder="รหัสผ่าน" class="rounded-xl border-gray-200 border-2 pt-2 pb-2 pl-10 placeholder-gray-500 w-full shadow-xl"/>
                 </div>
 
-                <input @click="login()" type="submit" value="เข้าสู่ระบบ" class="rounded-xl p-2 mt-3 mb-3 w-72 text-white bg-[#2E4E73] hover:bg-[#1A314C] text-center" >
+                <router-link to="">
+                    <input @click="login()" type="submit" value="เข้าสู่ระบบ" class="rounded-xl p-2 mt-3 mb-3 w-72 text-white bg-[#2E4E73] hover:bg-[#1A314C] text-center" >
+                </router-link>
                 <router-link to="Register" class="m-5 underline text-sm font-medium text-[#2E4E73]">
                     ยังไม่มีบัญชี?
                 </router-link>
@@ -39,13 +41,14 @@
 
 <script>
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 export default {
     data() {
         return {
           email: '',
           password: '',
-          user: null
+          profile: null
         };
     },
     methods: {
@@ -58,18 +61,28 @@ export default {
                 console.log(value);
             }
 
-            axios.get("http://localhost:3000/Login", formData, {
+            axios.post("http://localhost:3000/Login", formData ,{
                 headers: {
-                    "Content-Type": "multipart/form-data",
-                },
+                'Content-Type': 'multipart/form-data'
+            }
             })
             .then((response) => {
-                this.user = response.data;
-                console.log(response.data)
+                console.log(response)
+                this.profie = response.data
+                if(this.profie == 'อีเมลหรือรหัสผ่านไม่ถูกต้อง'){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'อีเมลหรือรหัสผ่านไม่ถูกต้อง',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }else{
+                    this.$router.push('/HomeLogin/'+ this.profie[0].id)
+                }     
+            }).catch((err) => {
+                console.log(err)
             })
-            .catch((err) => {
-                console.log(err);
-            });
         },
     }
 }

@@ -2,139 +2,17 @@
   <section id="app" style="font-family: 'Prompt', sans-serif">
     <NavBar />
     <div class="flex flex-row mt-14 mx-20">
-      <div class="basis-5/6">
-        <h1 class="text-5xl font-medium tracking-wide mb-5">AJ Park</h1>
-        <p>ข้อมูลหอพัก</p>
-      </div>
+            <div class="basis-5/6">
+                <h1 class='text-5xl font-medium tracking-wide mb-5'>{{dormitory[0].name}}</h1>
+                <p>{{dormitory[0].address}}</p>
+            </div>
+            <div class="flex flex-row mx-10 gap-5 justify-end basis-1/6">
+                <router-link to="/EditDormitory" class="h-12 w-8/12 flex justify-end">
+                    <button class="text-white font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500">แก้ไขข้อมูล</button>
+                </router-link>
+            </div>
     </div>
-    <div class="flex flex-col justify-center align-center">
-      <div class="mb-4">
-        <label
-          class="block text-gray-700 text-sm font-bold mb-2"
-          for="username"
-        >
-          ชื่อหอพัก
-        </label>
-        <input
-          class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b"
-          id="username"
-          type="text"
-          placeholder="AJ Park"
-        />
-      </div>
-      <h1>ที่อยู่ :</h1>
-      <div class="grid grid-cols-2 gap-2">
-        <div>
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
-          >
-            เลขที่/ถนน/ซอย/อาคาร
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b"
-            id="username"
-            type="text"
-            placeholder="AJ Park"
-          />
-        </div>
-        <div>
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
-          >
-            จังหวัด
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b"
-            id="username"
-            type="text"
-            placeholder="AJ Park"
-          />
-        </div>
-        <div>
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
-          >
-            แขวง/ตำบล
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b"
-            id="username"
-            type="text"
-            placeholder="AJ Park"
-          />
-        </div>
-        <div>
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
-          >
-            รหัสไปรษณีย์
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b"
-            id="username"
-            type="text"
-            placeholder="AJ Park"
-          />
-        </div>
-      </div>
-
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        วันที่ทำบิลค่าเช่า :
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b"
-        id="username"
-        type="text"
-        placeholder="AJ Park"
-      />
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        จำนวนห้อง :
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b"
-        id="username"
-        type="text"
-        placeholder="AJ Park"
-      />
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        ค่าน้ำ (/หน่วย) :
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b"
-        id="username"
-        type="text"
-        placeholder="AJ Park"
-      />
-      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-        ค่าไฟ (/หน่วย) :
-      </label>
-      <input
-        class="shadow appearance-none border rounded w-96 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-b"
-        id="username"
-        type="text"
-        placeholder="AJ Park"
-      />
-    </div>
-    <div class="flex flex-row mx-10 justify-end gap-10 mb-10">
-        <button
-          class="text-white font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500"
-        >
-          ลบข้อมูล
-        </button>
-        <router-link to="/EditDormitory">
-          <button
-          class="text-white font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500"
-        >
-          แก้ไขข้อมูล
-        </button>
-        </router-link>
-    </div>
-    
-    <FooterBar></FooterBar>
+    <FooterBar />
   </section>
 </template>
 
@@ -155,10 +33,11 @@ export default {
   },
   created() {
     axios
-      .get("")
+      axios.get("http://localhost:3000/Dormitory/" + this.$route.params.userId+'/' + this.$route.params.dorId)
       .then((response) => {
-        this.dormitory = response.data;
-        console.log(response.data);
+        this.dormitory = response.data.dormitory[0];
+        console.log(this.$route.params.userId)
+        console.log(response)
       })
       .catch((err) => {
         console.log(err);
