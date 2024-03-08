@@ -45,7 +45,7 @@ const routes = [
     component: () => import('./views/DorPage.vue')
   },
   {
-    path: '/EditDormitory',
+    path: '/EditDormitory/:userId/:dorId',
     name: 'EditDormitory',
     component: () => import('./views/EditDor.vue')
   },

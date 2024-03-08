@@ -7,8 +7,8 @@
                 <p>{{dormitory[0].address}}</p>
             </div>
             <div class="flex flex-row mx-10 gap-5 justify-end basis-1/6">
-                <router-link to="/EditDormitory" class="h-12 w-8/12 flex justify-end">
-                    <button class="text-white font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500">แก้ไขข้อมูล</button>
+                <router-link to="" class="h-12 w-8/12 flex justify-end">
+                    <button @click="editDor()" class="text-white font-medium p-3 rounded-3xl bg-[#2E4E73] hover:bg-gray-500">แก้ไขข้อมูล</button>
                 </router-link>
             </div>
     </div>
@@ -29,6 +29,8 @@ export default {
   data() {
     return {
       dormitory: null,
+      userId : this.$route.params.userId,
+      dorId : this.$route.params.dorId
     };
   },
   created() {
@@ -43,5 +45,11 @@ export default {
         console.log(err);
       });
   },
+  methods: {
+        editDor(){
+          console.log(this.userId, this.dorId)
+            this.$router.push('/EditDormitory/'+this.userId+'/'+this.dorId)
+        }
+    }
 };
 </script>
