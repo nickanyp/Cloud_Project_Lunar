@@ -30,12 +30,12 @@ const routes = [
     component: () => import('./views/RegisDor.vue')
   },
   {
-    path: '/NotiPayment',
+    path: '/NotiPayment/:userId/:dorId',
     name: 'NotiPayment',
     component: () => import('./views/NotiPayment.vue')
   },
   {
-    path: '/Renter',
+    path: '/Renter/:userId/:dorId',
     name: 'Renter',
     component: () => import('./views/RenterPage.vue')
   },
@@ -50,7 +50,7 @@ const routes = [
     component: () => import('./views/EditDor.vue')
   },
   {
-    path: '/AddRenter',
+    path: '/AddRenter/:userId/:dorId',
     name: 'AddRenter',
     component: () => import('./views/AddRenter.vue')
   },
