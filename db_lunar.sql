@@ -8,6 +8,7 @@ CREATE TABLE user (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 CREATE TABLE dormitory (
+<<<<<<< Updated upstream
     id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
     user_id INT NOT NULL,
     name VARCHAR(255) NOT NULL,
@@ -24,6 +25,24 @@ CREATE TABLE dormitory (
     duedate VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+=======
+    dormitory_id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
+    dormitory_user_id INT NOT NULL,
+    dormitory_name VARCHAR(255) NOT NULL,
+    dormitory_address VARCHAR(255) NOT NULL,
+    dormitory_province VARCHAR(255) NOT NULL,
+    dormitory_district VARCHAR(255) NOT NULL,
+    dormitory_parish VARCHAR(255) NOT NULL,
+    dormitory_post VARCHAR(255) NOT NULL,
+    dormitory_phone VARCHAR(255) NOT NULL,
+    dormitory_room INT NOT NULL,
+    dormitory_floor INT NOT NULL,
+    dormitory_water INT NOT NULL,
+    dormitory_light INT NOT NULL,
+    dormitory_duedate DATE NOT NULL,
+    FOREIGN KEY (dormitory_user_id) REFERENCES user(user_id)
+);
+>>>>>>> Stashed changes
 
 CREATE TABLE renter (
     id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
