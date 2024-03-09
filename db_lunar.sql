@@ -47,6 +47,6 @@ CREATE TABLE payment (
     water INT NOT NULL,
     light INT NOT NULL,
     status BOOLEAN NOT NULL,
-    FOREIGN KEY (dor_id) REFERENCES dormitory(id)
+    FOREIGN KEY (dor_id) REFERENCES dormitory(id),
     FOREIGN KEY (renter_id) REFERENCES renter(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
