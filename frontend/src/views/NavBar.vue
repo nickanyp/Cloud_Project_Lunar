@@ -10,10 +10,10 @@
                 <h1 class="text-white text-lg tracking-wider mx-5">DORMITORY</h1>
             </div>
             <div class="flex flex-row gap-10 justify-center content-center items-center w-full ">
-                <router-link to="/HomeLogin" class="text-white border-2 border-white text-base hover:bg-slate-500 border-3 rounded-3xl hover:no-underline p-3">หอพักทั้งหมด</router-link>
-                <router-link to="/Dormitory" class="text-white text-base hover:bg-slate-500 border-3 rounded-3xl hover:no-underline p-3">ข้อมูลหอพัก</router-link>
-                <router-link to="/Renter" class="text-white text-base hover:bg-slate-500 border-3 rounded-3xl hover:no-underline p-3">ข้อมูลผู้เช่า</router-link>
-                <router-link to="/NotiPayment" class="text-white text-base hover:bg-slate-500 border-3 rounded-3xl hover:no-underline p-3">แจ้งชำระ</router-link>
+                <div @click="homeLogin()" class="text-white border-2 border-white text-base hover:bg-slate-500 border-3 rounded-3xl hover:no-underline p-3">หอพักทั้งหมด</div>
+                <div @click="dorPage()" class="text-white text-base hover:bg-slate-500 border-3 rounded-3xl hover:no-underline p-3">ข้อมูลหอพัก</div>
+                <div @click="renter()" class="text-white text-base hover:bg-slate-500 border-3 rounded-3xl hover:no-underline p-3">ข้อมูลผู้เช่า</div>
+                <div @click="notiPay()" class="text-white text-base hover:bg-slate-500 border-3 rounded-3xl hover:no-underline p-3">แจ้งชำระ</div>
             </div>
 
             <div class="flex justify-center content-center items-center w-40">
@@ -25,3 +25,29 @@
         </div>
       </nav>
 </template>
+
+<script>
+
+export default {
+    data() {
+        return {
+            userId : this.$route.params.userId,
+            dorId : this.$route.params.dorId
+        };
+    },
+    methods: {
+        homeLogin(){
+            this.$router.push('/HomeLogin/'+this.userId)
+        },
+        dorPage(){
+            this.$router.push('/Dormitory/'+this.userId+'/'+this.dorId)
+        },
+        renter(){
+            this.$router.push('/Renter/'+this.userId+'/'+this.dorId)
+        },
+        notiPay(){
+            this.$router.push('/NotiPayment/'+this.userId+'/'+this.dorId)
+        }
+    }
+}
+</script>
