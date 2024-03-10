@@ -24,7 +24,7 @@ router.post('/RegisUser',upload.single(), async function(req, res, next){
             [req.body.fname, req.body.lname, req.body.email, req.body.password, req.body.phone]
         );
         console.log('success')
-        return(res.json(result))
+        return res.json(result)
     
     }catch(err){
         console.log(err)
