@@ -143,7 +143,9 @@ router.get('/Renter/:userId/:dorId',upload.single(), async function(req, res, ne
         const result = await pool.query(
             `select * from renter where dor_id = ?`, [req.params.dorId]
         );
-        return res.json(result)
+        return res.json({
+            renter: result
+          })
     }catch (err){
         console.log(err)
     }
@@ -154,7 +156,9 @@ router.get('/detailRenter/:userId/:dorId/:rentId',upload.single(), async functio
         const result = await pool.query(
             `select * from renter where id = ? and dor_id = ?`, [req.params.rentId, req.params.dorId]
         );
-        return res.json(result)
+        return res.json({
+            renter: result
+        })
     }catch (err){
         console.log(err)
     }

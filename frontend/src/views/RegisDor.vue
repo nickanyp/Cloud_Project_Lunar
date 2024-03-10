@@ -1,4 +1,3 @@
-@ -0,0 +1,98 @@
 <template>
     <section id="app" style="font-family: 'Prompt', sans-serif;">
         <NavBar />

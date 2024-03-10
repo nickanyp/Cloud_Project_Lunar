@@ -54,6 +54,16 @@ const routes = [
     name: 'AddRenter',
     component: () => import('./views/AddRenter.vue')
   },
+  {
+    path: '/RenterDetail/:userId/:dorId/:rentId',
+    name: 'DetailRenter',
+    component: () => import('./views/RenterDetail.vue')
+  },
+  {
+    path: '/EditRenter/:userId/:dorId/:rentId',
+    name: 'EditRenter',
+    component: () => import('./views/EditRenter.vue')
+  },
 ]
 
 const router = new VueRouter({

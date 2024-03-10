@@ -151,7 +151,7 @@ export default {
             .then((response) => {
                 console.log(response.data[0])
                 Swal.fire({
-                    position: 'top-end',
+                    position: 'center',
                     icon: 'success',
                     title: 'แก้ไขสำเร็จ',
                     showConfirmButton: false,
