@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "แบบฝึกหัดสัปดาห์ที่ 9 Express / MySql",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "nodemon index.js"
@@ -25,6 +26,6 @@
     "mysql2": "^2.2.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.22"
   }
 }

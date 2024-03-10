@@ -18,3 +18,5 @@ app.use(cloudRouter.router)
 app.listen(3000, () => {
   console.log(`Example app listening at http://localhost:3000`)
 })
+
+app.get('/', (req, res) => res.json(`API running`))
