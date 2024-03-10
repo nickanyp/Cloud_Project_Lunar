@@ -74,7 +74,7 @@ export default {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'ลงทะเบียนหอพักสำเร็จ',
+                    title: 'เพิ่มผู้เช่าสำเร็จ',
                     showConfirmButton: false,
                     timer: 1500
                 }).then(() => {

@@ -43,10 +43,11 @@ CREATE TABLE payment (
     id INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
     dor_id INT NOT NULL,
     renter_id INT NOT NULL,
+    num_room VARCHAR(255) NOT NULL,
     date VARCHAR(255) NOT NULL,
     water INT NOT NULL,
     light INT NOT NULL,
-    status BOOLEAN NOT NULL,
+    `status` ENUM('1', '0'),
     FOREIGN KEY (dor_id) REFERENCES dormitory(id),
     FOREIGN KEY (renter_id) REFERENCES renter(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

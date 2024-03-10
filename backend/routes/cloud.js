@@ -141,7 +141,7 @@ router.post('/addRenter/:userId/:dorId',upload.single(), async function(req, res
 router.get('/Renter/:userId/:dorId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `select * from renter where dor_id = ?`, [req.params.dorId]
+            `select * from renter where dor_id = ? ORDER BY num_room`, [req.params.dorId]
         );
         return res.json({
             renter: result
@@ -166,6 +166,11 @@ router.get('/detailRenter/:userId/:dorId/:rentId',upload.single(), async functio
 
 router.put('/editRenter/:userId/:dorId/:rentId',upload.single(), async function(req, res, next){
     try{
+        const pay = await pool.query(
+            `UPDATE payment SET num_room=? where dor_id = ? and renter_id =?`, 
+            [req.body.num_room, req.params.dorId, req.params.rentId]
+        );
+
         const result = await pool.query(
             `UPDATE renter SET  num_room=?,  type=?, price=?, email=?, name1=?, phone1=?, name2=?, phone2=? WHERE id = ? and dor_id = ?`, 
             [req.body.num_room, req.body.type, req.body.price, req.body.email, req.body.name1, req.body.phone1, req.body.name2,
@@ -178,8 +183,12 @@ router.put('/editRenter/:userId/:dorId/:rentId',upload.single(), async function(
     }
 })
 
-router.delete('/deleteRenter/:userId/:dorId/:rentId', async function(req, res, next){
+router.delete('/deleteRenter/:userId/:dorId/:rentId', async function(req, res, next){   
     try{
+        const pay = await pool.query(
+            `delete from payment where renter_id = ? and dor_id = ?`, [req.params.rentId, req.params.dorId]
+        );
+
         const result = await pool.query(
             `delete from renter where id = ? and dor_id = ?`, [req.params.rentId, req.params.dorId]
         );
@@ -194,12 +203,22 @@ router.delete('/deleteRenter/:userId/:dorId/:rentId', async function(req, res, n
 
 // payment ==========================================================================================================================
 
-router.get('/payment/:userId/:dorId',upload.single(), async function(req, res, next){
+router.get('/payment/:userId/:dorId/:date',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `select * from payment p join renter r on(p.renter_id = r.id) where dor_id = ? and date = ?`, [req.params.dorId, req.body.date]
+            `select * from dormitory where id = ?`, [req.params.dorId]
         );
-        return res.json(result)
+        console.log(req.body.date)
+
+        const result2 = await pool.query(
+            `select * from payment where dor_id = ? and date=? ORDER BY num_room`, [req.params.dorId, req.params.date]
+        );
+
+        console.log(result2)
+        return res.json({
+            dorm:result,
+            payment: result2,
+        })
     }catch (err){
         console.log(err)
     }
@@ -208,8 +227,8 @@ router.get('/payment/:userId/:dorId',upload.single(), async function(req, res, n
 router.post('/addPayment/:userId/:dorId/:rentId',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            "insert into payment(dor_id, renter_id, date, water, light, status) VALUES(?, ?, ?, ?, ?, ?)",
-            [req.params.dorId, req.params.rentId, req.body.date, req.body.water, req.body.light, req.body.status]
+            "insert into payment(dor_id, renter_id, num_room, date, water, light, status) VALUES(?, ?, ?, ?, ?, ?, ?)",
+            [req.params.dorId, req.params.rentId, req.body.num_room, req.body.date, req.body.water, req.body.light, req.body.status]
         );
         console.log('success')
         return res.json(result)
@@ -218,11 +237,11 @@ router.post('/addPayment/:userId/:dorId/:rentId',upload.single(), async function
     }
 })
 
-router.put('/editRenter/:userId/:dorId/:rentId',upload.single(), async function(req, res, next){
+router.put('/editStatus/:userId/:dorId/:rentId/:date',upload.single(), async function(req, res, next){
     try{
         const result = await pool.query(
-            `UPDATE payment SET  water=?,  light=?, status=? where dor_id = ? and date = ? and renter_id =?`, 
-            [req.body.water, req.body.light, req.body.status, req.params.dorId, req.body.date, req.params.rentId]
+            `UPDATE payment SET status='1' where dor_id = ? and date = ? and renter_id =?`, 
+            [req.params.dorId, req.params.date, req.params.rentId]
         );
         console.log('success')
         return res.json(result)
