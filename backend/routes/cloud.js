@@ -20,6 +20,7 @@ router.post('/RegisUser',upload.single(), async function(req, res, next){
     const conn = await pool.getConnection()
     await conn.beginTransaction()
     try{
+        console.log(req.body.fname)
         const [result] = await pool.query(
             "insert into user(fname, lname, email, password, phone) VALUES(?, ?, ?, ?, ?)",
             [req.body.fname, req.body.lname, req.body.email, req.body.password, req.body.phone]
