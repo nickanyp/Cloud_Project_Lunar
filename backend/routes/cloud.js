@@ -29,8 +29,6 @@ router.post('/RegisUser',upload.single(), async function(req, res, next){
     }catch(err){
         await conn.rollback()
         console.log(err)
-    }finally{
-        conn.release()
     }
 })
 
