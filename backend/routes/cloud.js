@@ -18,14 +18,19 @@ const upload = multer({ storage: storage })
 
 router.post('/RegisUser',upload.single(), async function(req, res, next){
     try{
-        const result = await pool.query(
+        const conn = await pool.getConnection()
+        await conn.beginTransaction()
+        const [result] = await pool.query(
             "insert into user(fname, lname, email, password, phone) VALUES(?, ?, ?, ?, ?)",
             [req.body.fname, req.body.lname, req.body.email, req.body.password, req.body.phone]
         );
         console.log('success')
-        return res.json(result)
-    }catch (err){
+    
+    }catch(err){
+        await conn.rollback()
         console.log(err)
+    }finally{
+        conn.release()
     }
 })
 
