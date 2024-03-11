@@ -3,8 +3,8 @@
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
-  // host: 'lunar-db.cjygw2mieoqy.ap-southeast-1.rds.amazonaws.com',
-  host: '13.213.11.112',
+  host: 'lunar-db.cjygw2mieoqy.ap-southeast-1.rds.amazonaws.com',
+  // host: '13.213.11.112',
   user: 'admin',
   password: 'password',
   database: 'lunar',
