@@ -16,21 +16,20 @@ var storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 
-router.post('/RegisUser', upload.single(), async function(req, res, next) {
-    console.log(req.body.fname);
-    try {
+router.post('/RegisUser',upload.single(), async function(req, res, next){
+    console.log(req.body.fname)
+    try{
         const result = await pool.query(
-            "INSERT INTO user(fname, lname, email, password, phone) VALUES(?, ?, ?, ?, ?)",
+            "insert into user(fname, lname, email, password, phone) VALUES(?, ?, ?, ?, ?)",
             [req.body.fname, req.body.lname, req.body.email, req.body.password, req.body.phone]
         );
-        console.log('Success');
-        return res.json({ success: true, data: result });
-    } catch (err) {
-        console.error('Database Error:', err);
-        return res.status(500).json({ success: false, error: 'Database Error' });
-    }
+        console.log('success')
+        return res.json(result)
+    
+    }catch(err){
+        console.log(err)
+    } 
 });
-
 
 router.post('/Login', upload.single(), async(req, res) => {
     const email =  req.body.email
